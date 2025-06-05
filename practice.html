@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <style>
+    body {
+      font-family: sans-serif;
+      max-width: 400px;
+      margin: 20px auto;
+    }
+
+    img {
+      width: 100px;
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .product {
+      margin-bottom: 20px;
+    }
+
+    .row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    button:hover {
+      background-color: lightcoral;
+      color: white;
+      cursor: pointer;
+    }
+
+    .top-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-buttons">
+    <button id="totalBtn">購物車總額 $0</button>
+    <button onclick="clearCart()">清空購物車</button>
+  </div>
+
+  <div class="product">
+    <img src="noodles-2.jpg">
+    <div class="row">
+      <p>$25</p>
+      <button onclick="addToCart(25)">加入購物車</button>
+    </div>
+  </div>
+
+  <div class="product">
+    <img src="2.jpg">
+    <div class="row">
+      <p>$35</p>
+      <button onclick="addToCart(35)">加入購物車</button>
+    </div>
+  </div>
+
+  <script>
+    let total = localStorage.getItem("cartTotal") ? parseInt(localStorage.getItem("cartTotal")) : 0;
+    const totalBtn = document.getElementById("totalBtn");
+
+    function updateTotal() {
+      localStorage.setItem("cartTotal", total);
+      totalBtn.textContent = "購物車總額 $" + total;
+    }
+
+    function addToCart(price) {
+      total += price;
+      updateTotal();
+    }
+
+    function clearCart() {
+      total = 0;
+      updateTotal();
+      console.clear();
+    }
+
+    updateTotal();
+  </script>
+
+</body>
+</html>
